@@ -23,12 +23,10 @@ const Login = () => {
    await axios
       .post("http://localhost:3001/request/login", registrer)
       .then((res) => {
-        console.log()
         localStorage.setItem("auth-token",res.data);
         navigate("/mainPage");
       })
       .catch((err) => {
-        console.log(err.response);
         if (err && err.response.data === "Email not found") {
           setEmailExist(true);
         }

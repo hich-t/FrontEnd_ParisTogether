@@ -1,15 +1,9 @@
-import axios from "axios";
-import { useEffect,useState } from "react";
+import useLogged from "../logic/useLogged";
+
 
 const MainPage = () => {
-    const token = localStorage.getItem("auth-token")
-const [user,setUser] = useState("")
-useEffect(() => {
-    axios
-    .get("http://localhost:3001/request/user" , {headers : {"authorization" : token}})
-    .then((res)=> setUser(res.data))
-    .catch((err)=> console.log(err))
-},[])
+
+const [user] = useLogged()
 
     return (
         <>
