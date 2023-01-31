@@ -11,7 +11,7 @@ const useLogged = () => {
         .get("http://localhost:3001/request/user" , {headers : {"authorization" : token}})
         .then((res)=> setUser(res.data))
         .catch((err)=> console.log(err))
-    },[])
+    },[user])
 
 
 return [user]

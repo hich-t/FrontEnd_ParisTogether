@@ -13,7 +13,7 @@ const HomePage = () => {
   const [newEvent, setNewEvent] = useState([]);
   const [searchByCategorie, setSearchByCategorie] = useState(false);
   const [user] = useLogged();
-  
+ 
 
   const fetchTags = async () => {
     try {
@@ -60,7 +60,7 @@ const HomePage = () => {
       });
   };
 
-  const removeFavorite = (idEvent) => {
+  const removeFavorite = async (idEvent) => {
     axios
     .delete(
       `http://localhost:3001/request/user`,
