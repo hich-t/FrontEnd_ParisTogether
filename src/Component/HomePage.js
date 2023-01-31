@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import useLogged from "../logic/useLogged";
 import MapComponent from "../Component/MapComponent"
 import CalendarComponent from "../Component/Calendar"
-import CalendarTest from "../Component/TestCalendar"
+
 
 
 const HomePage = () => {
