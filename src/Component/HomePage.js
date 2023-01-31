@@ -186,12 +186,12 @@ const HomePage = () => {
               </div>
             ))}
         </div>
-      )} */}
-{/* <MapComponent center={[48.866667,2.333333]} event={event}/>
+      )} 
+ {/* <MapComponent center={[48.866667,2.333333]} event={event}/>
 <div style={{margin : "100px"}}>
 <CalendarComponent/>
-</div>
-{/* <CalendarTest/> */}
+</div> */}
+
     </>
   );
 };
