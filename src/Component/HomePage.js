@@ -4,7 +4,10 @@ import profile from "../Asset/profile.jpg";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import useLogged from "../logic/useLogged";
-const {fetch} = require('../logic/fetch')
+import MapComponent from "../Component/MapComponent"
+import CalendarComponent from "../Component/Calendar"
+import CalendarTest from "../Component/TestCalendar"
+
 
 const HomePage = () => {
   const token = localStorage.getItem("auth-token");
@@ -13,7 +16,16 @@ const HomePage = () => {
   const [newEvent, setNewEvent] = useState([]);
   const [searchByCategorie, setSearchByCategorie] = useState(false);
   const [user] = useLogged();
+  const [style, setStyle] = useState({});
  
+  const styleFav = (e) => {
+  if(user && user.favoriteEvent.includes(e)){
+    return { backgroundColor: "red" }
+  }
+  else return { backgroundColor: "gray" }
+ }
+
+
 
   const fetchTags = async () => {
     try {
@@ -58,6 +70,7 @@ const HomePage = () => {
       .catch((err) => {
         console.log(err)
       });
+
   };
 
   const removeFavorite = async (idEvent) => {
@@ -68,11 +81,14 @@ const HomePage = () => {
     )
     .then((res) => console.log(res.data))
     .catch((err) => console.log(err));
+
   }
 
   useEffect(() => {
     fetchTags();
   }, []);
+
+
 
   return (
     <>
@@ -159,9 +175,7 @@ const HomePage = () => {
                 <p>{e.fields.title}</p>
                 <button
                   style={
-                    user && user.favoriteEvent.includes(e.fields.id)
-                      ? { backgroundColor: "red" }
-                      : { backgroundColor: "none" }
+                    styleFav(e.fields.id)
                   }
                   onClick={() => user && user.favoriteEvent.includes(e.fields.id) ?
                     removeFavorite(e.fields.id) :
@@ -172,7 +186,12 @@ const HomePage = () => {
               </div>
             ))}
         </div>
-      )}
+      )} */}
+{/* <MapComponent center={[48.866667,2.333333]} event={event}/>
+<div style={{margin : "100px"}}>
+<CalendarComponent/>
+</div>
+{/* <CalendarTest/> */}
     </>
   );
 };

@@ -2,30 +2,28 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
-const Registrer = () => {
+const Register = () => {
   const [emailExist, setEmailExist] = useState(false);
   const [differentPassword, setDifferentPassword] = useState(false);
   const [register, setRegister] = useState("");
   const navigate = useNavigate();
 
-  const registreUser = (e) => {
+  const registerUser = (e) => {
     e.preventDefault();
     setRegister((register) => ({
       ...register,
       [e.target.name]: e.target.value,
     }));
   };
-
-  const sendRegistrer = async (e) => {
+  const sendRegister = async (e) => {
     e.preventDefault();
     setEmailExist(false);
     setDifferentPassword(false);
-    
    await axios
       .post("http://localhost:3001/request/register", register)
       .then((res) => {
         localStorage.setItem("auth-token",res.data)
-        navigate("/profile");
+        navigate("/registertwo");
       })
       .catch((err) => {
         console.log(err.response);
@@ -37,66 +35,73 @@ const Registrer = () => {
         }
       });
   };
-
   return (
     <div className="registerpage ">
-    <div className="registerframeform">
-      <form onSubmit={sendRegistrer}>
-        <label>
-          <div>
-            <h2>First Name :</h2>
-            <input className="inputforms"
+      <div className="registerleftside">
+      <h1 className="titleregister">Rejoins la communauté <br/>Paris Together et tous nos membres dès maintenant !</h1>
+        <div className="registerframeform">
+        <h1 className='registerformtitle'>Première étape, <br/>Faisons conaissance !</h1>
+          <form className='registerform' onSubmit={sendRegister}>
+          <label>Pseudo</label>
+            <input
+              className="inputforms"
+              type="text"
+              name="pseudo"
+             
+              onChange={ (e) => registerUser(e)}
+
+            />
+            <label>Prénom</label>
+            <input
+              className="inputforms"
               type="text"
               name="first_name"
-              onChange={(e) => registreUser(e)}
+              onChange={ (e) => registerUser(e)}
             />
-          </div>
-          <div>
-            <h2>Last Name :</h2>
-            <input className="inputforms"
+            <label>Nom de Famille</label>{" "}
+            <input
+              className="inputforms"
               type="text"
               name="last_name"
-              onChange={(e) => registreUser(e)}
+              onChange={ (e) => registerUser(e)}
             />
-          </div>
-          <div>
-            <h2>Email :</h2>
-            <input className="inputforms" type="email" name="email" onChange={(e) => registreUser(e)} />
-          </div>
-          <div>
-            <h2>Mot de passe :</h2>
-            <input className="inputforms"
+            <label>E-mail</label>{" "}
+            <input
+              className="inputforms"
+              type="email"
+              name="email"
+              onChange={ (e) => registerUser(e)}
+            />
+            <label>Mot de Passe</label>{" "}
+            <input
+              className="inputforms"
               type="password"
-              placeholder="Mot de passe"
+              placeholder="5 charac. min."
               name="password"
-              onChange={(e) => registreUser(e)}
+              onChange={ (e) => registerUser(e)}
             />
-          </div>
-          <div>
-            <h2>Confirmer Mot de passe :</h2>
-            <input  className="inputforms"
+            <label>Confirmer le Mot de Passe</label>{" "}
+            <input
+              className="inputforms"
               type="password"
-              placeholder="Confirmer Mot de passe"
               name="confirm_password"
-              onChange={(e) => registreUser(e)}
+              onChange={ (e) => registerUser(e)}
             />
-          </div>
-          <div>
-          <button className="registerbuttons" type="submit">S'Enregistrer</button>
+            
+            <button className="registerbuttons" type="submit">
+              Prochaine étape !
+            </button>
+          </form>
 
-          </div>
-        </label>
-      </form>
-      {emailExist && <p style={{ color: "red" }}>Email déjà utilisé</p>}
-      {differentPassword && (
-        <p style={{ color: "red" }}>Mot de passe renseignés différents</p>
-      )}
+          {emailExist && <p style={{ color: "red" }}>Email déjà utilisé</p>}
+          {differentPassword && (
+            <p style={{ color: "red" }}>Mot de passe renseignés différents</p>
+          )}
+        </div>
       </div>
-      <div className="registerrightframe">
-      </div>
-     </div>
-  
+      <div className="registerrightside"></div>
+    </div>
   );
 };
 
-export default Registrer;
+export default Register;
