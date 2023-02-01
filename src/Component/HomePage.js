@@ -10,6 +10,7 @@ import EventDetails from "./eventDetails/EventDetails";
 import "./homepage.css";
 import Video from "../Asset/vid.mp4";
 import VideoBis from "../Asset/pexels-yaroslav-shuraev-6185221.mp4";
+
 const HomePage = () => {
   const token = localStorage.getItem("auth-token");
   const [event, setEvent] = useState([]);
