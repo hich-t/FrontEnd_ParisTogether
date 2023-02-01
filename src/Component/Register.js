@@ -14,7 +14,8 @@ const Register = () => {
       ...register,
       [e.target.name]: e.target.value,
     }));
-  };
+  }; 
+  console.log(register)
   const sendRegister = async (e) => {
     e.preventDefault();
     setEmailExist(false);

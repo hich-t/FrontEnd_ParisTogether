@@ -4,11 +4,12 @@ import profile from "../Asset/profile.jpg";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import useLogged from "../logic/useLogged";
-import MapComponent from "../Component/MapComponent"
-import CalendarComponent from "../Component/Calendar"
-
-
-
+import MapComponent from "../Component/MapComponent";
+import CalendarComponent from "../Component/Calendar";
+import EventDetails from "./eventDetails/EventDetails";
+import "./homepage.css";
+import Video from "../Asset/vid.mp4";
+import VideoBis from "../Asset/pexels-yaroslav-shuraev-6185221.mp4";
 const HomePage = () => {
   const token = localStorage.getItem("auth-token");
   const [event, setEvent] = useState([]);
@@ -17,15 +18,12 @@ const HomePage = () => {
   const [searchByCategorie, setSearchByCategorie] = useState(false);
   const [user] = useLogged();
   const [style, setStyle] = useState({});
- 
+
   const styleFav = (e) => {
-  if(user && user.favoriteEvent.includes(e)){
-    return { backgroundColor: "red" }
-  }
-  else return { backgroundColor: "gray" }
- }
-
-
+    if (user && user.favoriteEvent.includes(e)) {
+      return { backgroundColor: "red" };
+    } else return { backgroundColor: "gray" };
+  };
 
   const fetchTags = async () => {
     try {
@@ -68,30 +66,50 @@ const HomePage = () => {
       .then((res) => console.log(res.data))
 
       .catch((err) => {
-        console.log(err)
+        console.log(err);
       });
-
   };
 
   const removeFavorite = async (idEvent) => {
     axios
-    .delete(
-      `http://localhost:3001/request/user`,
-      {data : {favoriteEvent: idEvent} , headers: { authorization: token } },
-    )
-    .then((res) => console.log(res.data))
-    .catch((err) => console.log(err));
-
-  }
+      .delete(`http://localhost:3001/request/user`, {
+        data: { favoriteEvent: idEvent },
+        headers: { authorization: token },
+      })
+      .then((res) => console.log(res.data))
+      .catch((err) => console.log(err));
+  };
 
   useEffect(() => {
     fetchTags();
+    fetchEventByTags();
   }, []);
 
-
+  {
+    /*               <div key={i}>
+  <img
+    src={e.fields.cover_url}
+    width="150px"
+    alt="eventPicture"
+  />
+  <p>{e.fields.title}</p>
+  <button
+    style={
+      user && user.favoriteEvent.includes(e.fields.id)
+        ? { backgroundColor: "red" }
+        : { backgroundColor: "none" }
+    }
+    onClick={() =>  user && user.favoriteEvent.includes(e.fields.id) ?
+      removeFavorite(e.fields.id) :
+    addFavorite(e.fields.id)}
+  >
+    Ajout favori
+  </button>
+</div> */
+  }
 
   return (
-    <>
+    <div className="homePage">
       <div
         style={{
           display: "flex",
@@ -120,9 +138,10 @@ const HomePage = () => {
           height: "300px",
         }}
       >
-        <h3>
-          Video présentation + Phrase accrochage décrivant l’intérêt du site
-        </h3>
+        <div className="videoCollections">
+          <video autoPlay muted height={"100%"} width={"100%"} src={Video} />
+          {/* <video autoPlay muted loop={true}  height={"100%"} width={"100%"} src={VideoBis}/> */}
+        </div>
       </div>
       <div style={{ display: "flex", justifyContent: "center" }}>
         <p>Catégorie :</p>
@@ -134,34 +153,17 @@ const HomePage = () => {
           ))
         )}
       </div>
-      {!searchByCategorie && (
-        <div style={{ display: "flex" }}>
+      {
+        <>
           <p>Nouveautés :</p>
-          {newEvent.length > 0 &&
-            newEvent.map((e, i) => (
-              <div key={i}>
-                <img
-                  src={e.fields.cover_url}
-                  width="150px"
-                  alt="eventPicture"
-                />
-                <p>{e.fields.title}</p>
-                <button
-                  style={
-                    user && user.favoriteEvent.includes(e.fields.id)
-                      ? { backgroundColor: "red" }
-                      : { backgroundColor: "none" }
-                  }
-                  onClick={() =>  user && user.favoriteEvent.includes(e.fields.id) ?
-                    removeFavorite(e.fields.id) :
-                  addFavorite(e.fields.id)}
-                >
-                  Ajout favori
-                </button>
-              </div>
-            ))}
-        </div>
-      )}
+          <div className="nouveauteAccueil">
+            {newEvent.length > 0 &&
+              newEvent.map((e) => (
+                <div>{e && <EventDetails user={user} event={e} />}</div>
+              ))}
+          </div>
+        </>
+      }
       {searchByCategorie && (
         <div style={{ display: "flex" }}>
           {event.length > 0 &&
@@ -174,25 +176,24 @@ const HomePage = () => {
                 />
                 <p>{e.fields.title}</p>
                 <button
-                  style={
-                    styleFav(e.fields.id)
+                  style={styleFav(e.fields.id)}
+                  onClick={() =>
+                    user && user.favoriteEvent.includes(e.fields.id)
+                      ? removeFavorite(e.fields.id)
+                      : addFavorite(e.fields.id)
                   }
-                  onClick={() => user && user.favoriteEvent.includes(e.fields.id) ?
-                    removeFavorite(e.fields.id) :
-                  addFavorite(e.fields.id)}
                 >
                   Ajout favorit
                 </button>
               </div>
             ))}
         </div>
-      )} 
- {/* <MapComponent center={[48.866667,2.333333]} event={event}/>
+      )}
+      {/* <MapComponent center={[48.866667,2.333333]} event={event}/>
 <div style={{margin : "100px"}}>
 <CalendarComponent/>
 </div> */}
-
-    </>
+    </div>
   );
 };
 

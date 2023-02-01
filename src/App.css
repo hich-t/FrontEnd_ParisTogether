@@ -22,7 +22,9 @@
     url("./fonts/AdobeCleanIt.otf") format("opentype");
 }
 
-
+body{
+  width: 100vw;
+}
 
 .App {
   text-align: center;
