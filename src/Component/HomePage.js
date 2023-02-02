@@ -159,8 +159,8 @@ const HomePage = () => {
           <p>Nouveautés :</p>
           <div className="nouveauteAccueil">
             {newEvent.length > 0 &&
-              newEvent.map((e) => (
-                <div>{e && <EventDetails user={user} event={e} />}</div>
+              newEvent.map((e,i) => (
+                <div key={i}>{e && <EventDetails user={user} event={e} />}</div>
               ))}
           </div>
         </>
@@ -190,10 +190,10 @@ const HomePage = () => {
             ))}
         </div>
       )}
-      {/* <MapComponent center={[48.866667,2.333333]} event={event}/>
+      {/* <MapComponent center={[48.866667,2.333333]} event={event}/> */}
 <div style={{margin : "100px"}}>
-<CalendarComponent/>
-</div> */}
+<CalendarComponent id={11113}/>
+</div>
     </div>
   );
 };

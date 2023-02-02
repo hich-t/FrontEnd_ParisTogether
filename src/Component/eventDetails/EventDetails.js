@@ -79,11 +79,12 @@ const EventDetails = (props) => {
           <div className="card-body taged">
             {props.event.fields.tags && (
               <div className="taged">
-                {split(props.event.fields.tags).map((e) => {
+                {split(props.event.fields.tags).map((e,i) => {
                   return (
                     <span
                       style={{ backgroundColor: colorTagMatcher(e) }}
                       className="tag"
+                      key={i}
                     >
                       {e}
                     </span>
