@@ -32,10 +32,13 @@ const Profile = () => {
   };
   const removeFavorite = async (tag) => {
     axios
-      .delete(`https://back-end-paris-together-meleelyes.vercel.app/request/user`, {
-        data: { favoriteTag: tag },
-        headers: { authorization: token },
-      })
+      .delete(
+        `https://back-end-paris-together-meleelyes.vercel.app/request/user`,
+        {
+          data: { favoriteTag: tag },
+          headers: { authorization: token },
+        }
+      )
       .then((res) => console.log(res.data))
       .catch((err) => console.log(err));
   };
@@ -43,7 +46,6 @@ const Profile = () => {
   // useEffect pour fetch les tags via API :
 
   useEffect(() => {
-
     axios
       .get(
         `https://opendata.paris.fr/api/records/1.0/search/?dataset=que-faire-a-paris-&facet=tags`
@@ -65,12 +67,16 @@ const Profile = () => {
     formData.append("profile_picture", image);
 
     axios
-      .put("https://back-end-paris-together-meleelyes.vercel.app/request/uploadimage", formData, {
-        headers: {
-          "content-type": "multipart/form-data",
-          authorization: token,
-        },
-      })
+      .put(
+        "https://back-end-paris-together-meleelyes.vercel.app/request/uploadimage",
+        formData,
+        {
+          headers: {
+            "content-type": "multipart/form-data",
+            authorization: token,
+          },
+        }
+      )
       .then((response) => {
         console.log(response.data);
       })
@@ -172,7 +178,7 @@ const Profile = () => {
             <h1 className="profiletitle">Ta photo de profil</h1>
             <img
               className="profileuserpic"
-              src={`http://localhost:3001${user.profile_picture}`}
+              src={`https://back-end-paris-together-meleelyes.vercel.app${user.profile_picture}`}
               alt=""
             />
             <input type="file" onChange={(e) => setImage(e.target.files[0])} />
@@ -321,10 +327,7 @@ const Profile = () => {
         </div>
 
         <div className="profilefoot">
-          <button
-            className="registerbuttons"
-            onClick={() => navigate("/")}
-          >
+          <button className="registerbuttons" onClick={() => navigate("/")}>
             Retourner à la page d'accueil
           </button>
         </div>
