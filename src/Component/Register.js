@@ -8,18 +8,25 @@ const Register = () => {
   const [register, setRegister] = useState("");
   const navigate = useNavigate();
 
+//  ici on remplace le contenu de notre 
+//  user model par ce que l'on entre dans les champs
+
   const registerUser = (e) => {
     e.preventDefault();
     setRegister((register) => ({
       ...register,
       [e.target.name]: e.target.value,
     }));
-  }; 
-  console.log(register)
+  };
+
+  // ici, on envoie les infos à notre backend 
+  // via un post sur le endpoint /register
+
   const sendRegister = async (e) => {
     e.preventDefault();
     setEmailExist(false);
     setDifferentPassword(false);
+
    await axios
       .post("http://localhost:3001/request/register", register)
       .then((res) => {
@@ -34,8 +41,12 @@ const Register = () => {
         if (err && err.response.data === "Confirmation password is not Ok") {
           setDifferentPassword(true);
         }
+     
       });
   };
+
+
+
   return (
     <div className="registerpage ">
       <div className="registerleftside">
@@ -48,7 +59,7 @@ const Register = () => {
               className="inputforms"
               type="text"
               name="pseudo"
-             
+              required
               onChange={ (e) => registerUser(e)}
 
             />
@@ -73,6 +84,13 @@ const Register = () => {
               name="email"
               onChange={ (e) => registerUser(e)}
             />
+            <label>Age</label>{" "}
+            <input
+              className="inputforms"
+              type="number"
+              name="age" min="18" max="99"
+              onChange={ (e) => registerUser(e)}
+            />
             <label>Mot de Passe</label>{" "}
             <input
               className="inputforms"
@@ -95,9 +113,11 @@ const Register = () => {
           </form>
 
           {emailExist && <p style={{ color: "red" }}>Email déjà utilisé</p>}
-          {differentPassword && (
-            <p style={{ color: "red" }}>Mot de passe renseignés différents</p>
-          )}
+
+          {differentPassword && 
+            <p style={{ color: "red" }}>Mot de passe renseignés différents</p> }
+
+         
         </div>
       </div>
       <div className="registerrightside"></div>
@@ -106,3 +126,5 @@ const Register = () => {
 };
 
 export default Register;
+
+

@@ -2,23 +2,27 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
+import useLogged from "../logic/useLogged";
 
 const CalendarComponent = (props) => {
+  const [user] = useLogged();
   const [date, setDate] = useState(new Date());
   const [userByDate, setUserByDate] = useState("");
   const token = localStorage.getItem("auth-token");
   const [events,setEvents] = useState([])
 
 
+
   const DisplayUser = async (value) => {
-    const userOnDate = events.filter(event => event.date === value.toLocaleString().slice(-20, -9))
+    const userOnDate = events.filter(event => event.date.toString() === value.toString().slice(0,15))
     setUserByDate(userOnDate);
   };
-
+  console.log(userByDate)
   const EventTile = ({ events }) =>
+
     events.map((event, i) => (
       <p key={i} style={{ color: "red" }}>
-        {event.user.length} per
+        {event.pseudo.length} per
       </p>
     ));
 
@@ -28,7 +32,7 @@ const CalendarComponent = (props) => {
         .catch(err => console.log(err))
     }
     const addUserEvent = (dateSelect) => {
-      axios.put(`http://localhost:3001/request/dateForEvent/${props.id}`, {date : dateSelect.toLocaleString().slice(-20, -9)},{ headers: { authorization: token } })
+      axios.put(`http://localhost:3001/request/dateForEvent/${props.id}`, {date : dateSelect.toString().slice(0,15),pseudo : user.pseudo},{ headers: { authorization: token } })
         .then(res => console.log(res.data))
         .catch(err => console.log(err))
     }
@@ -38,7 +42,7 @@ const CalendarComponent = (props) => {
     },[events])
     
   return (
-    <div className="app">
+    <div>
     <div style={{display:"flex" ,flexDirection : "row"}}>
       <div className="calendar-container">
         <Calendar
@@ -49,7 +53,7 @@ const CalendarComponent = (props) => {
           minDetail="year"
           tileContent={({ date }) => {
             const eventsOnDate = events.filter(
-              (event) => event.date === date.toLocaleString().slice(-20, -9)
+              (event) => event.date.toString() === date.toString().slice(0,15)
             );
             return eventsOnDate.length > 0 ? (
               <EventTile date={date} events={eventsOnDate} />
@@ -57,24 +61,23 @@ const CalendarComponent = (props) => {
           }}
         />
       </div>
-      {userByDate.length>0 && (
-        
-          <div className="text-center">
-            <span className="bold">Participants:</span>{" "}
-            {userByDate.map((el) => el.user.map((e, i) => <p key={i}>{e}</p>))}
-          </div>
-    
-      )}
+  
       </div>
       {date && (
         <div>
-          <p className="text-center">
-            <span className="bold">Date selectionné:</span>{" "}
-            {date.toLocaleString().slice(-20, -9)}
-          </p>
-          <button onClick={() => addUserEvent(date)}>Je participe aussi</button>
+          <button className="registerbuttons" onClick={() => addUserEvent(date)}>Je participe aussi</button>
         </div>
       )}
+      {userByDate.length>0 && (
+        
+        <div className="text-center">
+          <h5>Participants :</h5>
+          <ul>
+          {userByDate.map((el) => el.pseudo.map((e, i) => <li key={i}>{e}</li>))}
+          </ul>
+        </div>
+  
+    )}
     </div>
   );
 };

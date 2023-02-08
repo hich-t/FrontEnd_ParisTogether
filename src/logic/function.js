@@ -47,10 +47,23 @@ const colorTagMatcher = (tag) => {
     { Salon: "#8DA1B9" },
     { Brocante: "#646E68" },
     { Santé: "#3F4B3B" },
+    { Divers: "#3F4B3B" },
   ];
   let col = b.filter((e) => e[tag]);
   return String(Object.values(col[0]));
 };
 
 
-export {AddEvent,colorTagMatcher}
+const axiosFetch = async (url,testData) => {
+  try {
+    const callData = await axios.get(
+      url
+    );
+    testData(callData.data.records);
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+
+export {AddEvent,colorTagMatcher,axiosFetch}

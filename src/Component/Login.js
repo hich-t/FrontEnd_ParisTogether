@@ -24,7 +24,7 @@ const Login = () => {
       .post("http://localhost:3001/request/login", registrer)
       .then((res) => {
         localStorage.setItem("auth-token",res.data);
-        navigate("/mainPage");
+        navigate("/postlogin");
       })
       .catch((err) => {
         if (err && err.response.data === "Email not found") {
@@ -37,38 +37,57 @@ const Login = () => {
   };
 
   return (
-    <>
-      <h1>Login</h1>
-      <form className="form" onSubmit={sendRegistrer}>
-        <label>
-         <div>
-            <h2>Email :</h2>
-            <input type="text" name="email" onChange={(e) => registreUser(e)} />
-          </div>
-          <div>
-            <h2>Mot de passe :</h2>
+    <div className="loginpage">
+      <div className="loginleftside">
+        <h1 className="titlelogin">
+          &#129395;<br/>
+
+          Welcome Back !<br />
+          Ça faisait longtemps !<br />
+          Bienvenido de nuevo !<br />
+          久し振り !<br />
+          مرحبا بعودتك <br />
+        </h1>
+
+        <div className="loginformframe">
+          <form className="loginform" onSubmit={sendRegistrer}>
+            <label>Email</label>
             <input
+              className="inputforms"
+              type="text"
+              name="email"
+              onChange={(e) => registreUser(e)}
+            />
+            <br />
+            <label>Mot de passe</label>
+            <input
+              className="inputforms"
               type="password"
               placeholder="Mot de passe"
               name="password"
               onChange={(e) => registreUser(e)}
             />
-          </div>
-          <div>
-            <input
-              style={{ marginTop: "10%" }}
-              className="button"
+            <br />
+
+            <button
+              className={`loginbuttons ${
+                emailExist || differentPassword ? "shake-button" : ""
+              }`}
               type="submit"
-              value="Enregistrement"
-            />
-          </div>
-        </label>
-      </form>
-      {emailExist && <p style={{ color: "red" }}>Email non trouvé</p>}
-      {differentPassword && (
-        <p style={{ color: "red" }}>Mauvais password réesayer</p>
-      )}
-    </>
+            >
+              Connexion
+            </button>
+          </form>
+
+          {emailExist && <p className="errormsglogin" >Email non trouvé</p>}
+          {differentPassword && (
+            <p className="errormsglogin">Mauvais Mot de passe !</p>
+          )}
+        </div>
+      </div>
+
+      <div className="loginrightside"></div>
+    </div>
   );
 };
 
