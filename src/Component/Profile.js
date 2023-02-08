@@ -16,8 +16,8 @@ const Profile = () => {
   const [differentPassword, setDifferentPassword] = useState(false);
   const [emailExist, setEmailExist] = useState(false);
 
-// même fonction que dans Register2, ajout/retrait des tags favoris 
-console.log(user)
+  // même fonction que dans Register2, ajout/retrait des tags favoris
+
   const addFavorite = async (tag) => {
     axios
       .put(
@@ -43,13 +43,13 @@ console.log(user)
   // useEffect pour fetch les tags via API :
 
   useEffect(() => {
+
     axios
       .get(
         `https://opendata.paris.fr/api/records/1.0/search/?dataset=que-faire-a-paris-&facet=tags`
       )
       .then((response) => {
         setTags(response.data.facet_groups);
-        console.log(response.data.facet_groups);
         setLoaded(true);
       })
       .catch((error) => {
@@ -77,8 +77,8 @@ console.log(user)
       .catch((err) => console.log(err));
   };
 
-//ici , on va chercher les events de l'API qui correspondent 
-// avec les ID qui sont dans notre array favoriteEvent dans le user model.
+  //ici , on va chercher les events de l'API qui correspondent
+  // avec les ID qui sont dans notre array favoriteEvent dans le user model.
 
   useEffect(() => {
     if (user?.favoriteEvent && loaded) {
@@ -102,7 +102,7 @@ console.log(user)
     }
   }, [user, loaded]);
 
-//fonctions pour le changement de mail/mdp via un put sur le endpoint /update
+  //fonctions pour le changement de mail/mdp via un put sur le endpoint /update
 
   const [showEmailChange, setShowEmailChange] = useState(false);
   const [email, setEmail] = useState("");
@@ -139,7 +139,7 @@ console.log(user)
     e.preventDefault();
     if (password !== confirmPassword) {
       setError2("Les mots de passe ne correspondent pas");
-      setDifferentPassword(true)
+      setDifferentPassword(true);
       return;
     }
     try {
@@ -159,195 +159,179 @@ console.log(user)
     }
   };
 
-
-
-
   return (
-    
-
-
     <div className="profilepage">
+      <div className="profilepageleftside">
+        <h1 className="profiletitle">
+          {" "}
+          Bienvenue sur ton profil, {user.first_name}
+        </h1>
 
+        <div className="profilecontentframe">
+          <div className="profile_picarea">
+            <h1 className="profiletitle">Ta photo de profil</h1>
+            <img
+              className="profileuserpic"
+              src={`http://localhost:3001${user.profile_picture}`}
+              alt=""
+            />
+            <input type="file" onChange={(e) => setImage(e.target.files[0])} />
 
-
-    <div className="profilepageleftside">
-
-       
-          <h1 className="profiletitle">
-            {" "}
-            Bienvenue sur ton profil, {user.first_name}
-          </h1>
-
-          <div className="profilecontentframe">
-
-            <div className="profile_picarea">
-            <h1 className="profiletitle" >Ta photo de profil</h1>
-              <img
-                className="profileuserpic"
-                src={`http://localhost:3001${user.profile_picture}`}
-                alt=""
-              />
-              <input
-                type="file"
-                onChange={(e) => setImage(e.target.files[0])}
-              />
-
-              <button className="registerbuttons" onClick={postImage}>
-                Envoyer
-              </button>
-            </div>
-
-            <div className="profilemap">
-              <MapComponent />
-            </div>
-
-            <div className="profilinfos">
-
-              <div className="profilinfosframe">
-                <ul className="profileinfoslist">
-                  <h2>Tes infos personnelles</h2>
-                  <li>{user.pseudo} </li>
-                  <li>{user.first_name}</li>
-                  <li>{user.last_name}</li>
-                  <li>{user.age} ans</li>
-                  <li>{user.email}</li>
-                </ul>
-
-                {showEmailChange && (
-                  <div className="profileemailchange">
-                    <form onSubmit={handleSubmit}>
-                      <input className='inputforms'
-                        type="email"
-                        placeholder="Nouvel Email"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                      />
-                      <button className='registerbuttons' type="submit">Enregistrer</button>
-                      {error && <p className="error">{error}</p>}
-                    </form>
-                  </div>
-                )}
-
-                <button
-                  className="registerbuttons"
-                  onClick={() => setShowEmailChange(!showEmailChange)}
-                >
-                  {showEmailChange ? "Annuler" : "Changer ton email"}
-                </button>
-
-                {showPasswordChange && (
-                  <div className="password-change">
-                    <form onSubmit={handleSubmit2}>
-                      <input className='inputforms'
-                        type="password"
-                        placeholder="Nouveau Mot de Passe"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                      />
-                      <input className='inputforms'
-                        type="password"
-                        placeholder="Confirmer le Nouveau MdP"
-                        value={confirmPassword}
-                        onChange={(e) => setConfirmPassword(e.target.value)}
-                      />
-                      <button className="registerbuttons"
-                      type="submit">Enregistrer</button>
-                      {error2 && <p className="error">{error2}</p>}
-                    </form>
-                  </div>
-                )}
-
-                <button
-                  className="registerbuttons"
-                  onClick={() => setShowPasswordChange(!showPasswordChange)}
-                >
-                 {showPasswordChange ? "Annuler" : "Changer ton mot de passe"}
-                </button>
-
-                {emailExist && <p style={{ color: "red" }}>Email déjà utilisé</p>}
-
-                {differentPassword && 
-            <p style={{ color: "red" }}>Mot de passe renseignés différents</p>}
-
-              </div>
-
-            </div>
-          </div>
-
-          <div className="profilefavoriteeventsframe">
-            <h1 className="profilefavoritetitle">Tes évènements favoris</h1>
-            <div className="profilefaveventslist">
-              {user && user.favoriteEvent && user.favoriteEvent.length > 0 ? (
-                favEvents.map((event) => (
-                  <Cards key={event.fields.id} event={event} />
-                ))
-              ) : (
-                <div>
-                  <p>Tu n'as ajouté d'évenement dans tes favoris !</p>
-                  <img
-                    src="https://media.tenor.com/h1jmVbHLV6QAAAAM/vincent.gif"
-                    alt="gif vincent pulp fiction"
-                  />
-                </div>
-              )}
-            </div>  
-           
-
-          </div>
-
-          <div className="profilefavoritetagsframe">
-            <h1 className="profilefavoritetitle">Tes centres d'intérêt</h1>
-
-            {loaded &&
-              tags &&
-              tags.map((e, i) => (
-                <div className="resgister2tagslist">
-                  {e.facets &&
-                    e.facets.map((el, i) => (
-                      <div>
-                        <p
-                          className={`register2tags ${
-                            user &&
-                            user.favoriteTag.length > 0 &&
-                            user.favoriteTag.includes(el.name)
-                              ? "register2tagselected"
-                              : ""
-                          }`}
-                          // style={{backgroundColor: colorTagMatcher(el.name)}}
-
-                          onClick={() =>
-                            //  handleTagClick(el.name)
-                            user &&
-                            user.favoriteTag.length > 0 &&
-                            user.favoriteTag &&
-                            user.favoriteTag.includes(el.name)
-                              ? removeFavorite(el.name)
-                              : addFavorite(el.name)
-                          }
-                        >
-                          {el.name}
-                        </p>
-                      </div>
-                    ))}
-                </div>
-              ))}
-          </div>
-
-          <div className="profilefoot">
-            <button
-              className="registerbuttons"
-              onClick={() => navigate("/homepage")}
-            >
-              Retourner à la page d'accueil
+            <button className="registerbuttons" onClick={postImage}>
+              Envoyer
             </button>
           </div>
 
-        </div>     
+          <div className="profilemap">
+            <MapComponent nameClass={"markercluster-mapProfilandDetails"} />
+          </div>
 
-       <div className="profilepagerightside"></div>      
+          <div className="profilinfos">
+            <div className="profilinfosframe">
+              <ul className="profileinfoslist">
+                <h2>Tes infos personnelles</h2>
+                <li>{user.pseudo} </li>
+                <li>{user.first_name}</li>
+                <li>{user.last_name}</li>
+                <li>{user.age} ans</li>
+                <li>{user.email}</li>
+              </ul>
 
-       </div>
+              {showEmailChange && (
+                <div className="profileemailchange">
+                  <form onSubmit={handleSubmit}>
+                    <input
+                      className="inputforms"
+                      type="email"
+                      placeholder="Nouvel Email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                    />
+                    <button className="registerbuttons" type="submit">
+                      Enregistrer
+                    </button>
+                    {error && <p className="error">{error}</p>}
+                  </form>
+                </div>
+              )}
 
+              <button
+                className="registerbuttons"
+                onClick={() => setShowEmailChange(!showEmailChange)}
+              >
+                {showEmailChange ? "Annuler" : "Changer ton email"}
+              </button>
+
+              {showPasswordChange && (
+                <div className="password-change">
+                  <form onSubmit={handleSubmit2}>
+                    <input
+                      className="inputforms"
+                      type="password"
+                      placeholder="Nouveau Mot de Passe"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                    />
+                    <input
+                      className="inputforms"
+                      type="password"
+                      placeholder="Confirmer le Nouveau MdP"
+                      value={confirmPassword}
+                      onChange={(e) => setConfirmPassword(e.target.value)}
+                    />
+                    <button className="registerbuttons" type="submit">
+                      Enregistrer
+                    </button>
+                    {error2 && <p className="error">{error2}</p>}
+                  </form>
+                </div>
+              )}
+
+              <button
+                className="registerbuttons"
+                onClick={() => setShowPasswordChange(!showPasswordChange)}
+              >
+                {showPasswordChange ? "Annuler" : "Changer ton mot de passe"}
+              </button>
+
+              {emailExist && <p style={{ color: "red" }}>Email déjà utilisé</p>}
+
+              {differentPassword && (
+                <p style={{ color: "red" }}>
+                  Mot de passe renseignés différents
+                </p>
+              )}
+            </div>
+          </div>
+        </div>
+
+        <div className="profilefavoriteeventsframe">
+          <h1 className="profilefavoritetitle">Tes évènements favoris</h1>
+          <div className="profilefaveventslist">
+            {user && user.favoriteEvent && user.favoriteEvent.length > 0 ? (
+              favEvents.map((event, i) => <Cards key={i} event={event} />)
+            ) : (
+              <div>
+                <p>Tu n'as ajouté d'évenement dans tes favoris !</p>
+                <img
+                  src="https://media.tenor.com/h1jmVbHLV6QAAAAM/vincent.gif"
+                  alt="gif vincent pulp fiction"
+                />
+              </div>
+            )}
+          </div>
+        </div>
+
+        <div className="profilefavoritetagsframe">
+          <h1 className="profilefavoritetitle">Tes centres d'intérêt</h1>
+
+          {loaded &&
+            tags &&
+            tags.map((e, i) => (
+              <div className="resgister2tagslist">
+                {e.facets &&
+                  e.facets.map((el, i) => (
+                    <div key={el._}>
+                      <p
+                        className={`register2tags ${
+                          user &&
+                          user.favoriteTag.length > 0 &&
+                          user.favoriteTag.includes(el.name)
+                            ? "register2tagselected"
+                            : ""
+                        }`}
+                        // style={{backgroundColor: colorTagMatcher(el.name)}}
+
+                        onClick={() =>
+                          //  handleTagClick(el.name)
+                          user &&
+                          user.favoriteTag.length > 0 &&
+                          user.favoriteTag &&
+                          user.favoriteTag.includes(el.name)
+                            ? removeFavorite(el.name)
+                            : addFavorite(el.name)
+                        }
+                      >
+                        {el.name}
+                      </p>
+                    </div>
+                  ))}
+              </div>
+            ))}
+        </div>
+
+        <div className="profilefoot">
+          <button
+            className="registerbuttons"
+            onClick={() => navigate("/")}
+          >
+            Retourner à la page d'accueil
+          </button>
+        </div>
+      </div>
+
+      <div className="profilepagerightside"></div>
+    </div>
   );
 };
 

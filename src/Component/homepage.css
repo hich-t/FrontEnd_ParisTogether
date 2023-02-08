@@ -21,6 +21,7 @@
     url("../fonts/AdobeCleanIt.otf") format("opentype");
 }
 
+  @import url('https://fonts.googleapis.com/css2?family=Nanum+Brush+Script&display=swap');
 
 .nouveauteAccueil {
   display: flex;
@@ -208,16 +209,7 @@ background-size: cover;
 
 }
 
-.topPannel:before {
-  content: "";
-  position: absolute;
-  height: 386px;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.1);
-}
+
 
 .landingTittle {
   display: flex;
@@ -234,10 +226,10 @@ background-size: cover;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-family: "Adobe Regular";
-  font-size: x-large;
-  text-decoration: underline;
+  font-size:30px;
   padding-top:50px;
+  font-family: 'Adobe regular';
+  color: #5C9D8B;
 }
 
 .charger {

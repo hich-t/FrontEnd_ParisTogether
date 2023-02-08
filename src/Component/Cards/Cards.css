@@ -24,6 +24,9 @@
   display: flex;
   min-width: 300px;
   justify-content: space-around;
+  align-content: center;
+  align-items: center;
+
 }
 .card {
   margin: 10px;
@@ -32,7 +35,9 @@
   box-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);
   overflow: hidden;
   width: 300px;
-  height: 550px;
+  height: 600px;
+  cursor: pointer;
+  align-content: center;
 }
 .card-img {
   width: 100%;
@@ -46,6 +51,8 @@
   align-items: flex-start;
   padding: 15px;
   min-height: 200px;
+  align-content: center;
+
 }
 
 .tag {
@@ -91,6 +98,7 @@
 .titleCard {
   margin-top: 10px;
   font-family: "Adobe Bold";
+  
 }
 
 .textCard {
@@ -98,6 +106,7 @@
   font-family: "Adobe Regular";
 overflow-y: scroll;
 font-size: smaller;
+text-align: justify;
 }
 
 .location {

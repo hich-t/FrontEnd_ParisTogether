@@ -67,7 +67,7 @@ const MapComponent = (props) => {
     <>
       <MapContainer
         key={location}
-        className="markercluster-map"
+        className={props.nameClass}
         center={location}
         zoom={15}
         maxZoom={18}

@@ -6,6 +6,9 @@ import "./homepage.css";
 import useLogged from "../logic/useLogged";
 import Video from "../Asset/vid.mp4";
 import Cards from "./Cards/Cards";
+import Button from 'react-bootstrap/Button';
+import CurrentMovies from "../Component/CurrentMovies"
+import Footer from "../Component/Footer"
 
 const HomePage = () => {
   const token = localStorage.getItem("auth-token");
@@ -45,16 +48,16 @@ const HomePage = () => {
     }
   };
 
-  // const fetchAllData = async () => {
-  //   try {
-  //     const callData = await axios.get(
-  //       `https://opendata.paris.fr/api/records/1.0/search/?dataset=que-faire-a-paris-&q=&rows=3000`
-  //     );
-  //     setAllData(callData.data.records);
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // };
+  const fetchAllData = async () => {
+    try {
+      const callData = await axios.get(
+        `https://opendata.paris.fr/api/records/1.0/search/?dataset=que-faire-a-paris-&q=&rows=3000`
+      );
+      setAllData(callData.data.records);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
 
   const fetchEventByTags = async (e) => {
@@ -73,17 +76,18 @@ const HomePage = () => {
 
   useEffect(() => {
     fetchTags();
-    // fetchAllData();
+ fetchAllData();
   }, []);
 
   const handleChange = async (e) => {
     // setEvent(allData);
+    e.target.value.length > 0 ? setTagActive("Résultats de votre recherche") : fetchTags()
     // setEvent((current) =>
     //   current.filter((el) =>
     //     el.fields.title.toLowerCase().includes(e.target.value.toLowerCase())
     //   )
     // );
-    e.target.value.length > 0 ? setTagActive("Résultats de votre recherche") : fetchTags()
+    // 
 
     try {
       const callData = await axios.get(
@@ -115,11 +119,14 @@ const HomePage = () => {
           </div> */}
         </div>
 
-        <Modal className="mod" show={show} onHide={handleClose}>
+        <Modal className="mod" show={show} onClick={handleClose}>
+        <Modal.Header closeButton>
+        </Modal.Header>
           <Modal.Body>
             {" "}
-            <MapComponent className="modd" event={allData} />
+            <MapComponent className="modd" event={allData} nameClass={"markercluster-map"} />
           </Modal.Body>
+        
         </Modal>
 
         <div className="arroundMe">
@@ -172,6 +179,9 @@ const HomePage = () => {
               ))
             )}
           </div>
+          
+         
+
           <div className="landingRender">
             <div className="filtre">
               {tagActive !== "Nouveautés" ? tagActive : "Nouveautés"}
@@ -195,6 +205,10 @@ const HomePage = () => {
           )}
         </div>
       </div>
+      <div className="titrefilms">Plutôt envie d'un ciné ? Voici les films actuellement à l'affiche </div>
+
+      <CurrentMovies />
+      <Footer />
     </div>
   );
 };

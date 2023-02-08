@@ -23,8 +23,6 @@ const EventDetails = () => {
   const [displayTel, setDisplayTel] = useState(false);
   const { id } = useParams();
 
-  console.log(event);
-
   const fetchData = async () => {
     try {
       const callData = await axios.get(
@@ -48,8 +46,8 @@ const EventDetails = () => {
   return (
     <>
       {event &&
-        event.map((e) => (
-          <div className="globalContainer">
+        event.map((e, i) => (
+          <div className="globalContainer" key={i}>
             <div>
               <div className="detailledInfoContainer">
                 <img
@@ -58,7 +56,7 @@ const EventDetails = () => {
                   alt="eventCover"
                 />
 
-                <h1>{e.fields.title}</h1>
+                <div className="tittleDetailsCard">{e.fields.title}</div>
                 <div className="taged">
                   {e.fields.tags &&
                     split(e.fields.tags).map((e, i) => {
@@ -73,9 +71,10 @@ const EventDetails = () => {
                       );
                     })}
                 </div>
-                <p>{e.fields.lead_text}</p>
+
+                {/* <div className="leadText">{e.fields.lead_text}</div> */}
                 <div
-                  className="testconverthtml"
+                  className="testconverthtml fullDescription"
                   dangerouslySetInnerHTML={{ __html: e.fields.description }}
                   style={{
                     display: "flex",
@@ -89,11 +88,15 @@ const EventDetails = () => {
               </div>
             </div>
             <div>
-              <div className="profilecontentframe">
-                <div className="profileCalendar">
-                  <MapComponent center={e.fields.lat_lon} />
-                  <h4>Adresse :</h4>
+              <div className="profilecontentframeDetails">
+                <div className="locationDetailsContainer">
+                  <MapComponent
+                    center={e.fields.lat_lon}
+                    nameClass={"markercluster-mapProfilandDetails"}
+                  />
+                  {/* <h4>Adresse :</h4> */}
                   <div
+                    className="adressDetails"
                     style={{
                       display: "flex",
                       alignItems: "center",
@@ -101,17 +104,17 @@ const EventDetails = () => {
                     }}
                   >
                     <img src={Geo} alt="geo" width={"50px"} />
-                    <p>{`${e.fields.address_street} ${e.fields.address_zipcode} ${e.fields.address_city}`}</p>
+                    <div>
+                      <p>{`${e.fields.address_street}`}</p>
+                      <p>{`${e.fields.address_zipcode} ${e.fields.address_city}`}</p>
+                    </div>
                   </div>
                 </div>
-                <div className="profileCalendar">
+                <div className="infoDetailsContainer">
                   <h2>Informations</h2>
-                  <div
-                    style={{
-                      display: "flex",
-                      alignItems: "center",
-                      gap: "5px",
-                    }}
+                  <div className="line"></div>
+                  <div 
+
                   >
                     <h4>Date :</h4>
                     <p>
@@ -126,9 +129,9 @@ const EventDetails = () => {
                             .slice(-20, -10)
                         : `${new Date(e.fields.date_start)
                             .toLocaleString()
-                            .slice(-20, -10)} au ${new Date(e.fields.date_end)
+                            .slice(-20, -9)} au ${new Date(e.fields.date_end)
                             .toLocaleString()
-                            .slice(-20, -10)}`}
+                            .slice(-20, -9)}`}
                     </p>
                   </div>
                   <div
@@ -141,9 +144,9 @@ const EventDetails = () => {
                     <h4>Accessibilité :</h4>
                     {event &&
                       event.map(
-                        (e) =>
+                        (e, i) =>
                           e.fields.price_type && (
-                            <div style={{ display: "flex" }}>
+                            <div style={{ display: "flex" }} key={i}>
                               <img
                                 className="ico"
                                 src={Money}
@@ -157,16 +160,21 @@ const EventDetails = () => {
                     <div>
                       {event &&
                         event.map(
-                          (e) =>
+                          (e, i) =>
                             e.fields.blind === 1 && (
-                              <img src={Blind} alt="" width={"40px"} />
+                              <img src={Blind} alt="" width={"40px"} key={i} />
                             )
                         )}
                       {event &&
                         event.map(
-                          (e) =>
+                          (e, i) =>
                             e.fields.pmr === 1 && (
-                              <img src={Handicap} alt="" width={"40px"} />
+                              <img
+                                src={Handicap}
+                                alt=""
+                                width={"40px"}
+                                key={i}
+                              />
                             )
                         )}
                     </div>
@@ -181,31 +189,33 @@ const EventDetails = () => {
                     <h4>Contacts :</h4>
                     {event &&
                       event.map(
-                        (e) =>
+                        (e, i) =>
                           e.fields.contact_phone && (
                             <img
                               src={Tel}
                               alt="tel"
                               width={"40px"}
                               onClick={() => setDisplayTel(!displayTel)}
+                              key={i}
                             />
                           )
                       )}
                     {event &&
                       event.map(
-                        (e) =>
+                        (e, i) =>
                           e.fields.contact_mail && (
                             <img
                               src={Mail}
                               alt="mail"
                               width={"40px"}
                               onClick={() => setDisplayMail(!displayMail)}
+                              key={i}
                             />
                           )
                       )}
                     {event &&
                       event.map(
-                        (e) =>
+                        (e, i) =>
                           e.fields.contact_url && (
                             <img
                               src={Site}
@@ -214,21 +224,22 @@ const EventDetails = () => {
                               onClick={() =>
                                 window.open(e.fields.contact_url, "_blank")
                               }
+                              key={i}
                             />
                           )
                       )}
                   </div>
                   {event &&
                     event.map(
-                      (e) =>
+                      (e, i) =>
                         e.fields.contact_mail &&
-                        displayMail && <p>{e.fields.contact_mail}</p>
+                        displayMail && <p key={i}>{e.fields.contact_mail}</p>
                     )}
                   {event &&
                     event.map(
-                      (e) =>
+                      (e, i) =>
                         e.fields.contact_phone &&
-                        displayTel && <p>{e.fields.contact_phone}</p>
+                        displayTel && <p key={i}>{e.fields.contact_phone}</p>
                     )}
                   <div
                     style={{
@@ -240,7 +251,7 @@ const EventDetails = () => {
                     <h4>Réseaux Sociaux :</h4>
                     {event &&
                       event.map(
-                        (e) =>
+                        (e, i) =>
                           e.fields.contact_facebook && (
                             <img
                               src={Facebook}
@@ -249,12 +260,13 @@ const EventDetails = () => {
                               onClick={() =>
                                 window.open(e.fields.contact_facebook, "_blank")
                               }
+                              key={i}
                             />
                           )
                       )}
                     {event &&
                       event.map(
-                        (e) =>
+                        (e, i) =>
                           e.fields.contact_twitter && (
                             <img
                               src={Twitter}
@@ -263,12 +275,13 @@ const EventDetails = () => {
                               onClick={() =>
                                 window.open(e.fields.contact_twitter, "_blank")
                               }
+                              key={i}
                             />
                           )
                       )}
                   </div>
                 </div>
-                <div className="profileCalendar">
+                <div className="profileCalendarDetails">
                   <CalendarComponent id={id} />
                 </div>
               </div>

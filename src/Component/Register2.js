@@ -95,12 +95,12 @@ const Register2 = () => {
           ))}
           <button className="registerbuttons">Étape Précedente</button>
 
-          <button onClick={() => navigate("/homepage")}
+          <button onClick={() => navigate("/")}
           className="registerbuttons" type="submit">
             Ignorer cette étape pour l'instant
           </button>
 
-          <button onClick={() => navigate("/homepage")} 
+          <button onClick={() => navigate("/")} 
           className="registerbuttons" type="submit">
             Tout est bon ? C'est Parti !
           </button>

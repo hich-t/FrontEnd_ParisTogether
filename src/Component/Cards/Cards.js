@@ -13,16 +13,17 @@ import Deaf from "../../Asset/icons8-sourd-50 (1).png";
 import Empty from "../../Asset/emptyHeart.png";
 import useLogged from "../../logic/useLogged";
 
+
 const Cards = (props) => {
 
   const navigate = useNavigate()
   const [user] = useLogged();
   const token = localStorage.getItem("auth-token");
-
+  const [isVisible, setIsVisible] = useState(false);
   
   const addFavorite = async (idEvent) => {
+    if(user){
     AddEvent(idEvent)
-
     await axios
       .put(
         `http://localhost:3001/request/user`,
@@ -33,17 +34,30 @@ const Cards = (props) => {
 
       .catch((err) => {
         console.log(err);
-      });
+      });}
+      else{
+        setIsVisible(true);
+        setTimeout(() => {
+          setIsVisible(false);
+        }, 2000);
+      }
   };
 
   const removeFavorite = async (idEvent) => {
+    if(user){
     axios
       .delete(`http://localhost:3001/request/user`, {
         data: { favoriteEvent: idEvent },
         headers: { authorization: token },
       })
       .then((res) => console.log(res.data))
-      .catch((err) => console.log(err));
+      .catch((err) => console.log(err));}
+      else{
+        setIsVisible(true);
+        setTimeout(() => {
+          setIsVisible(false);
+        }, 2000);
+      }
   };
 
 
@@ -57,6 +71,13 @@ const Cards = (props) => {
       <div key={props.event.fields.id} className="container">
         <div className="card">
           <div className="card-header">
+          {isVisible && (
+             <div style={{ position: 'absolute'}}>
+        <div className="map-popup">
+          <p>L'ajout aux favoris est resevé aux abonnés</p>
+        </div>
+        </div>
+      )}
             <img
               className="ico-coeur"
               src={

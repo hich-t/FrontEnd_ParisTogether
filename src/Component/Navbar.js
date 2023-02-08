@@ -1,6 +1,7 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate,Outlet } from "react-router-dom";
 import {useState, useEffect} from "react"
 import useLogged from "../logic/useLogged"
+
 
 
 const Navbar = () => {
@@ -31,11 +32,12 @@ const Navbar = () => {
 
 
     return(
+      <>
         <div className="navbar">
 
         <div className="navbarrightimg">
         <img className="navbarlogo" src= "../../ptlogo.png" alt="paristogetherlogo" />
-        <img onClick={() => navigate('/homepage')} className="navbarhomelogo" src="../../homelogo.png"  alt="Revenir à la page d'accueil" />
+        <img onClick={() => navigate('/')} className="navbarhomelogo" src="../../homelogo.png"  alt="Revenir à la page d'accueil" />
         </div>
 
             {/* simple ternaire pour afficher les éléments 
@@ -75,9 +77,10 @@ const Navbar = () => {
             </button>
             </div>
            ) }
-
-
+          
         </div>
+         <Outlet />
+         </>
     )
 }
 

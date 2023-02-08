@@ -54,16 +54,16 @@ const colorTagMatcher = (tag) => {
 };
 
 
-const axiosFetch = async (url,testData) => {
-  try {
-    const callData = await axios.get(
-      url
-    );
-    testData(callData.data.records);
-  } catch (err) {
-    console.log(err);
-  }
-}
+// const axiosFetch = async (url,testData) => {
+//   try {
+//     const callData = await axios.get(
+//       url
+//     );
+//     testData(callData.data.records);
+//   } catch (err) {
+//     console.log(err);
+//   }
+// }
 
 
-export {AddEvent,colorTagMatcher,axiosFetch}
+export {AddEvent,colorTagMatcher}

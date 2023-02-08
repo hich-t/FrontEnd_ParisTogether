@@ -9,7 +9,7 @@ const CommentList = () => {
   const { id } = useParams();
   const [comments, setComments] = useState([]);
   const [sendComments, setSendComments] = useState();
-  const [reload,setReload] = useState(false)
+
 
 
   const addComment = (event,e) => {
@@ -29,8 +29,8 @@ const CommentList = () => {
       { headers: { authorization: token } })
       .then((res) => console.log(res.data))
       .catch((err) => console.log(err));
-      setReload(!reload)
-      e.target.reset();
+      e.target.reset()
+  
   };
 
   useEffect(() => {
@@ -38,7 +38,7 @@ const CommentList = () => {
       .get(`http://localhost:3001/request/comment/${id}`)
       .then((res) => {res.data !== "No comments" && setComments(res.data)})
       .catch((err) => console.log(err));
-  }, [reload]);
+  }, [comments]);
 
   return (
     <>

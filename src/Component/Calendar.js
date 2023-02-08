@@ -17,7 +17,7 @@ const CalendarComponent = (props) => {
     const userOnDate = events.filter(event => event.date.toString() === value.toString().slice(0,15))
     setUserByDate(userOnDate);
   };
-  console.log(userByDate)
+
   const EventTile = ({ events }) =>
 
     events.map((event, i) => (
@@ -64,7 +64,7 @@ const CalendarComponent = (props) => {
   
       </div>
       {date && (
-        <div>
+        <div className="jeParticipe">
           <button className="registerbuttons" onClick={() => addUserEvent(date)}>Je participe aussi</button>
         </div>
       )}
