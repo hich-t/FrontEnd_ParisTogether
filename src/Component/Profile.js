@@ -21,7 +21,7 @@ const Profile = () => {
   const addFavorite = async (tag) => {
     axios
       .put(
-        `http://localhost:3001/request/user`,
+        `https://back-end-paris-together-meleelyes.vercel.app/request/user`,
         { favoriteTag: tag },
         { headers: { authorization: token } }
       )
@@ -32,7 +32,7 @@ const Profile = () => {
   };
   const removeFavorite = async (tag) => {
     axios
-      .delete(`http://localhost:3001/request/user`, {
+      .delete(`https://back-end-paris-together-meleelyes.vercel.app/request/user`, {
         data: { favoriteTag: tag },
         headers: { authorization: token },
       })
@@ -65,7 +65,7 @@ const Profile = () => {
     formData.append("profile_picture", image);
 
     axios
-      .put("http://localhost:3001/request/uploadimage", formData, {
+      .put("https://back-end-paris-together-meleelyes.vercel.app/request/uploadimage", formData, {
         headers: {
           "content-type": "multipart/form-data",
           authorization: token,
@@ -112,7 +112,7 @@ const Profile = () => {
     e.preventDefault();
     try {
       const res = await axios.put(
-        "http://localhost:3001/request/update",
+        "https://back-end-paris-together-meleelyes.vercel.app/request/update",
         { email },
         {
           headers: {
@@ -144,7 +144,7 @@ const Profile = () => {
     }
     try {
       const res = await axios.put(
-        "http://localhost:3001/request/update",
+        "https://back-end-paris-together-meleelyes.vercel.app/request/update",
         { password: password, confirm_password: confirmPassword },
         {
           headers: {

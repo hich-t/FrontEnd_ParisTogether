@@ -231,6 +231,9 @@ height: 500px;
 }
 .registerrightside {
   z-index: 5;
+  position: fixed;
+  right: 0;
+  top: 0;
   background-image: url("https://as1.ftcdn.net/v2/jpg/05/61/74/06/1000_F_561740668_NPikJNFGm0VP9nOi72BPLkE9pMc4LaBO.jpg");
   width: 35%;
   height: 100vh;
@@ -311,6 +314,9 @@ height: 500px;
   box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px,
     rgba(0, 0, 0, 0.22) 0px 15px 12px;
   z-index: 5;
+  position: fixed;
+  right: 0;
+  top: 0;
 }
 
 .register2leftside {
@@ -357,7 +363,7 @@ height: 500px;
 }
 
 .register2tags {
-  font-family: "Adobe Bold";
+  font-family: "Adobe Regular";
   margin: 5px 7px;
   font-size: 13px;
   background-color: #30ba9d;
@@ -368,7 +374,7 @@ height: 500px;
 }
 
 .register2tagselected {
-  font-family: "Adobe Regular";
+  font-family: "Adobe Bold";
   margin: 5px 7px;
   font-size: 13px;
   background-color: #d63230;
@@ -401,6 +407,9 @@ height: 500px;
   box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px,
     rgba(0, 0, 0, 0.22) 0px 15px 12px;
   z-index: 5;
+  position: fixed;
+  right: 0;
+  top: 0;
 }
 
 .loginformframe {

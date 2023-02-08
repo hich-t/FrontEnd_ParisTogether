@@ -25,7 +25,7 @@ const CommentList = () => {
   const sendMessage = (e) => {
     e.preventDefault();
     axios
-      .post(`http://localhost:3001/request/comment/${id}`,sendComments,
+      .post(`https://back-end-paris-together-meleelyes.vercel.app/request/comment/${id}`,sendComments,
       { headers: { authorization: token } })
       .then((res) => console.log(res.data))
       .catch((err) => console.log(err));
@@ -35,7 +35,7 @@ const CommentList = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:3001/request/comment/${id}`)
+      .get(`https://back-end-paris-together-meleelyes.vercel.app/request/comment/${id}`)
       .then((res) => {res.data !== "No comments" && setComments(res.data)})
       .catch((err) => console.log(err));
   }, [comments]);

@@ -3,7 +3,7 @@ import axios from "axios";
 const AddEvent = (idEvent) => {
     axios
     .get(
-      `http://localhost:3001/request/event/${idEvent}`
+      `https://back-end-paris-together-meleelyes.vercel.app/request/event/${idEvent}`
       )
     .then((res) => console.log(res.data))
 

@@ -21,7 +21,7 @@ const Login = () => {
     setEmailExist(false);
     setDifferentPassword(false);
    await axios
-      .post("http://localhost:3001/request/login", registrer)
+      .post("https://back-end-paris-together-meleelyes.vercel.app/request/login", registrer)
       .then((res) => {
         localStorage.setItem("auth-token",res.data);
         navigate("/postlogin");

@@ -27,8 +27,6 @@ const CurrentMovies = () => {
   };
 
   const handleNextClick = () => {
-    console.log((movies.length)/5)
-    console.log(currentIndex)
     if (currentIndex >= 3) {
       return;
     }

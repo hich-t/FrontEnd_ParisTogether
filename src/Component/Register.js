@@ -28,7 +28,7 @@ const Register = () => {
     setDifferentPassword(false);
 
    await axios
-      .post("http://localhost:3001/request/register", register)
+      .post("https://back-end-paris-together-meleelyes.vercel.app/request/register", register)
       .then((res) => {
         localStorage.setItem("auth-token",res.data)
         navigate("/registertwo");

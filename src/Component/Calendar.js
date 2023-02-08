@@ -27,12 +27,12 @@ const CalendarComponent = (props) => {
     ));
 
     const fetchByEventId = () => {
-        axios.get(`http://localhost:3001/request/dateForEvent/all/${props.id}`)
+        axios.get(`https://back-end-paris-together-meleelyes.vercel.app/request/dateForEvent/all/${props.id}`)
         .then(res => setEvents(res.data))
         .catch(err => console.log(err))
     }
     const addUserEvent = (dateSelect) => {
-      axios.put(`http://localhost:3001/request/dateForEvent/${props.id}`, {date : dateSelect.toString().slice(0,15),pseudo : user.pseudo},{ headers: { authorization: token } })
+      axios.put(`https://back-end-paris-together-meleelyes.vercel.app/request/dateForEvent/${props.id}`, {date : dateSelect.toString().slice(0,15),pseudo : user.pseudo},{ headers: { authorization: token } })
         .then(res => console.log(res.data))
         .catch(err => console.log(err))
     }
