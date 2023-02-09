@@ -2,7 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
-import useLogged from "../logic/useLogged";
+import useLogged from "../../logic/useLogged";
 
 const CalendarComponent = (props) => {
   const [user] = useLogged();

@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
-import useLogged from "../logic/useLogged";
+import useLogged from "../../logic/useLogged";
 
 const CommentList = () => {
   const token = localStorage.getItem("auth-token");

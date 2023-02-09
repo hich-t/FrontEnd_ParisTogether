@@ -16,7 +16,7 @@ const PostLogin = () => {
              </h1>
             <div className='postloginchoiceframe'>
             <h1 className="postlogintitle2">Que souhaites-tu faire ? </h1>
-            <button onClick={() => navigate("/homepage")}
+            <button onClick={() => navigate("/")}
           className="registerbuttons" >
           Vers la page d'accueil
           </button>

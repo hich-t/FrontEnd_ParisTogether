@@ -2,9 +2,9 @@ import { useParams } from "react-router-dom";
 import { colorTagMatcher } from "../logic/function";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import MapComponent from "./MapComponent";
-import CalendarComponent from "./Calendar";
-import CommentList from "./Forum";
+import MapComponent from "../Component/reusableComponent/MapComponent";
+import CalendarComponent from "../Component/reusableComponent/Calendar";
+import CommentList from "../Component/reusableComponent/Forum";
 import Money from "../Asset/money.png";
 import Handicap from "../Asset/icons8-disability-64.png";
 import Blind from "../Asset/icons8-malvoyant-60.png";
@@ -15,7 +15,7 @@ import Tel from "../Asset/icons8-téléphone-100.png";
 import Mail from "../Asset/icons8-nouveau-message-100.png";
 import Site from "../Asset/icons8-www-100.png";
 
-import "./EventDetails.css";
+import "../Styles/EventDetails.css";
 
 const EventDetails = () => {
   const [event, setEvent] = useState([]);

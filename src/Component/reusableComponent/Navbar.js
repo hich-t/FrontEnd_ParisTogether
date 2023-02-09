@@ -1,6 +1,6 @@
 import { useNavigate, Outlet } from "react-router-dom";
 import { useState, useEffect } from "react";
-import useLogged from "../logic/useLogged";
+import useLogged from "../../logic/useLogged";
 
 const Navbar = () => {
   const navigate = useNavigate();

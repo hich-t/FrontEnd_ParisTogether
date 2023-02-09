@@ -2,8 +2,9 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import useLogged from "../logic/useLogged";
-import MapComponent from "./MapComponent";
-import Cards from "./Cards/Cards";
+import MapComponent from "../Component/reusableComponent/MapComponent";
+import Cards from "../Component/reusableComponent/Cards";
+
 
 const Profile = () => {
   const token = localStorage.getItem("auth-token");
@@ -57,6 +58,9 @@ const Profile = () => {
       .catch((error) => {
         console.log(error);
       });
+
+
+     
   }, []);
 
   // ici, la fonctionnalité pour upload une nouvelle image de profil
@@ -106,6 +110,7 @@ const Profile = () => {
 
       fetchFavEvents();
     }
+
   }, [user, loaded]);
 
   //fonctions pour le changement de mail/mdp via un put sur le endpoint /update

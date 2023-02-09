@@ -1,16 +1,19 @@
 import { useEffect, useState } from "react";
-import MapComponent from "./MapComponent";
+import MapComponent from "../Component/reusableComponent/MapComponent";
 import Modal from "react-bootstrap/Modal";
 import axios from "axios";
-import "./homepage.css";
+import "../Styles/homepage.css";
 import useLogged from "../logic/useLogged";
 import Video from "../Asset/vid.mp4";
-import Cards from "./Cards/Cards";
-import Button from 'react-bootstrap/Button';
-import CurrentMovies from "../Component/CurrentMovies"
-import Footer from "../Component/Footer"
-
+import Cards from "../Component/reusableComponent/Cards";
+import Button from "react-bootstrap/Button";
+import CurrentMovies from "../Component/reusableComponent/CurrentMovies";
+import Footer from "../Component/reusableComponent/Footer";
+import { UserContext } from "../Context/UserContext";
+import { useContext } from "react";
 const HomePage = () => {
+
+  const [userLogged, setUserLogged] = useContext(UserContext);
   const token = localStorage.getItem("auth-token");
   const [event, setEvent] = useState([]);
   const [tags, setTags] = useState([]);
@@ -22,7 +25,7 @@ const HomePage = () => {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-
+console.log(userLogged)
   const loadMore = () => {
     let count = numberOfResult + 4;
     setNumberOfResult(count);
@@ -59,7 +62,6 @@ const HomePage = () => {
     }
   };
 
-
   const fetchEventByTags = async (e) => {
     setNumberOfResult(8);
     setTagActive(`${e}`);
@@ -76,18 +78,20 @@ const HomePage = () => {
 
   useEffect(() => {
     fetchTags();
- fetchAllData();
+    fetchAllData();
   }, []);
 
   const handleChange = async (e) => {
     // setEvent(allData);
-    e.target.value.length > 0 ? setTagActive("Résultats de votre recherche") : fetchTags()
+    e.target.value.length > 0
+      ? setTagActive("Résultats de votre recherche")
+      : fetchTags();
     // setEvent((current) =>
     //   current.filter((el) =>
     //     el.fields.title.toLowerCase().includes(e.target.value.toLowerCase())
     //   )
     // );
-    // 
+    //
 
     try {
       const callData = await axios.get(
@@ -98,9 +102,7 @@ const HomePage = () => {
     } catch (err) {
       console.log(err);
     }
-
   };
-
 
   return (
     <div className="homePage">
@@ -120,13 +122,15 @@ const HomePage = () => {
         </div>
 
         <Modal className="mod" show={show} onClick={handleClose}>
-        <Modal.Header closeButton>
-        </Modal.Header>
+          <Modal.Header closeButton></Modal.Header>
           <Modal.Body>
             {" "}
-            <MapComponent className="modd" event={allData} nameClass={"markercluster-map"} />
+            <MapComponent
+              className="modd"
+              event={allData}
+              nameClass={"markercluster-map"}
+            />
           </Modal.Body>
-        
         </Modal>
 
         <div className="arroundMe">
@@ -179,8 +183,6 @@ const HomePage = () => {
               ))
             )}
           </div>
-          
-         
 
           <div className="landingRender">
             <div className="filtre">
@@ -205,7 +207,9 @@ const HomePage = () => {
           )}
         </div>
       </div>
-      <div className="titrefilms">Plutôt envie d'un ciné ? Voici les films actuellement à l'affiche </div>
+      <div className="titrefilms">
+        Plutôt envie d'un ciné ? Voici les films actuellement à l'affiche{" "}
+      </div>
 
       <CurrentMovies />
       <Footer />

@@ -1,24 +1,23 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
 @font-face {
   font-family: "Helvetica";
-  src: local("Helvetica.ttc"), url("../../fonts/Helvetica.ttc") format("truetype");
+  src: local("Helvetica.ttc"), url("../fonts/Helvetica.ttc") format("truetype");
 }
 @font-face {
   font-family: "Adobe Bold";
   src: local("AdobeCleanBold.otf"),
-    url("../../fonts/AdobeCleanBold.otf") format("opentype");
+    url("../fonts/AdobeCleanBold.otf") format("opentype");
 }
 @font-face {
   font-family: "Adobe Regular";
   src: local("AdobeCleanRegular.otf"),
-    url("../../fonts/AdobeCleanRegular.otf") format("opentype");
+    url("../fonts/AdobeCleanRegular.otf") format("opentype");
 }
 @font-face {
   font-family: "Adobe Italic";
   src: local("AdobeCleanIt.otf"),
-    url("../../fonts/AdobeCleanIt.otf") format("opentype");
+    url("../fonts/AdobeCleanIt.otf") format("opentype");
 }
-
 
 .container {
   display: flex;
@@ -26,7 +25,6 @@
   justify-content: space-around;
   align-content: center;
   align-items: center;
-
 }
 .card {
   margin: 10px;
@@ -52,7 +50,6 @@
   padding: 15px;
   min-height: 200px;
   align-content: center;
-
 }
 
 .tag {
@@ -68,7 +65,7 @@
 
 .card-body p {
   font-size: 12px;
-  overflow-y: scroll
+  overflow-y: scroll;
 }
 .user {
   bottom: 0;
@@ -82,12 +79,10 @@
   position: relative;
 }
 
-
-
 .ico-coeur {
   width: 50px;
   height: 50px;
-  margin: 2px 0px 0px 250px;
+  margin: -203px 0px 0px 250px;
   position: absolute;
 }
 
@@ -98,15 +93,14 @@
 .titleCard {
   margin-top: 10px;
   font-family: "Adobe Bold";
-  
 }
 
 .textCard {
   max-height: 90px;
   font-family: "Adobe Regular";
-overflow-y: scroll;
-font-size: smaller;
-text-align: justify;
+  overflow-y: scroll;
+  font-size: smaller;
+  text-align: justify;
 }
 
 .location {
@@ -137,19 +131,25 @@ text-align: justify;
   width: 250px;
 }
 
-.tagContainer{
-
+.tagContainer {
   min-height: 50px;
 }
 
-.bodyContainer{
+.bodyContainer {
   height: 180px;
 }
 
-.pmr{
+.pmr {
   width: 50px;
   height: 50px;
-  margin: 150px 0px 0px 250px;
+  margin: -52px 0px 0px 250px;
   position: absolute;
 }
 
+.taged{
+  height: 82px;
+}
+
+.cardImgAtribute{
+  position: relative;
+}
