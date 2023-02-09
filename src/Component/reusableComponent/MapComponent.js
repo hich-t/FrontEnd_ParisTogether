@@ -12,6 +12,7 @@ const MapComponent = (props) => {
   const mapRef = useRef();
   const navigate = useNavigate()
 
+  //Icone dédié à la localisation de l'utilisateur
   const greenIcon = new L.Icon({
     iconUrl:
       "https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-green.png",
@@ -23,6 +24,7 @@ const MapComponent = (props) => {
     shadowSize: [41, 41],
   });
 
+  //fonction qui récup les lat et lon en fonction d'une query (API de openstreetmap)
   const geocodeAddress = async (e) => {
     setConsentGeoLoc(false);
     e.preventDefault();
@@ -37,8 +39,8 @@ const MapComponent = (props) => {
     }
   };
 
+  //fonction qui localise la position via le browser
   const geoLocationCoord = () => {
-  
     setConsentGeoLoc(true);
     navigator.geolocation.getCurrentPosition(
       (position) => {
@@ -50,6 +52,7 @@ const MapComponent = (props) => {
     );
   };
 
+  //au chargement et à chaque changement du state
   useEffect(() => {
     if(props.center){
       setLocation(props.center)
@@ -95,8 +98,6 @@ const MapComponent = (props) => {
               )
           )}
 
-{/* <button className="registerbuttons" onClick={()=> navigate(`/eventdetails/${e.fields.id}`)}>{e.fields.title}</button> */}
-
         <TileLayer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
@@ -118,12 +119,7 @@ const MapComponent = (props) => {
             Search
           </button>
         </form>
-        {/* <img
-          src={locationIcon}
-          style={{ width: "20px", height: "25px" }}
-          alt="locationIcon"
-          onClick={() => geoLocationCoord()}
-        /> */}
+ 
        
       </div>
       }

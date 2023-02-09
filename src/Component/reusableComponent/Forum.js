@@ -10,6 +10,7 @@ const CommentList = () => {
   const [comments, setComments] = useState([]);
   const [sendComments, setSendComments] = useState();
 
+  // à chaque frappe ajout des éléments à l'objet comment
   const addComment = (event, e) => {
     e.preventDefault();
     setSendComments((sendComments) => ({
@@ -19,25 +20,23 @@ const CommentList = () => {
       picture: user.profile_picture,
     }));
   };
-
+  //post du sendComments sur la base
   const sendMessage = (e) => {
     e.preventDefault();
     axios
-      .post(
-        `https://back-end-paris-together-meleelyes.vercel.app/request/comment/${id}`,
-        sendComments,
-        { headers: { authorization: token } }
-      )
+      .post(`http://localhost:3001/request/comment/${id}`, sendComments, {
+        headers: { authorization: token },
+      })
       .then((res) => console.log(res.data))
       .catch((err) => console.log(err));
     e.target.reset();
   };
 
+  //au chargement et à chaque nouveau post de comment, refecth l'array des comments pour cette event
+
   useEffect(() => {
     axios
-      .get(
-        `https://back-end-paris-together-meleelyes.vercel.app/request/comment/${id}`
-      )
+      .get(`http://localhost:3001/request/comment/${id}`)
       .then((res) => {
         res.data !== "No comments" && setComments(res.data);
       })
@@ -66,7 +65,7 @@ const CommentList = () => {
                   key={comment.id}
                 >
                   <img
-                    src={`https://back-end-paris-together-meleelyes.vercel.app${comment.profile_picture}`}
+                    src={`http://localhost:3001${comment.profile_picture}`}
                     width="30px"
                     height={"30px"}
                     style={{ borderRadius: "100px" }}

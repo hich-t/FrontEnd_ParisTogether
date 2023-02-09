@@ -1,16 +1,14 @@
 import axios from "axios";
 
 const AddEvent = (idEvent) => {
-    axios
-    .get(
-      `https://back-end-paris-together-meleelyes.vercel.app/request/event/${idEvent}`
-      )
+  axios
+    .get(`http://localhost:3001/request/event/${idEvent}`)
     .then((res) => console.log(res.data))
 
     .catch((err) => {
       console.log(err);
     });
-}
+};
 
 const colorTagMatcher = (tag) => {
   const b = [
@@ -54,16 +52,4 @@ const colorTagMatcher = (tag) => {
 };
 
 
-// const axiosFetch = async (url,testData) => {
-//   try {
-//     const callData = await axios.get(
-//       url
-//     );
-//     testData(callData.data.records);
-//   } catch (err) {
-//     console.log(err);
-//   }
-// }
-
-
-export {AddEvent,colorTagMatcher}
+export { AddEvent, colorTagMatcher };

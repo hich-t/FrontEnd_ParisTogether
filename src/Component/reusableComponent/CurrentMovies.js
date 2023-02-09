@@ -6,18 +6,27 @@ import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import CardActionArea from '@mui/material/CardActionArea';
 
+
+
+const CurrentMovies = () => {
+
+// infos nécéssaires pour l'autorisation sur l'API
+
 const API_KEY = "8b2427b3a5ae1475e6decc300a6eb415";
 const endpoint = `https://api.themoviedb.org/3/movie/now_playing?api_key=${API_KEY}&language=fr`;
 
-const CurrentMovies = () => {
   const [movies, setMovies] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
+
+// fetch classique avec le endpoint passsé en variable définié plus gaut
 
   useEffect(() => {
     axios.get(endpoint)
       .then(res => setMovies(res.data.results))
       .catch(err => console.log(err));
   }, []);
+
+  // fonctions défniies pour gérer le scroll horizonral à l'aide des boutons 
 
   const handlePrevClick = () => {
     if (currentIndex === 0) {
@@ -30,8 +39,10 @@ const CurrentMovies = () => {
     if (currentIndex >= 3) {
       return;
     }
-    setCurrentIndex(currentIndex + 1);
+    setCurrentIndex(currentIndex + 0.5);
   };
+
+// utilisation de Material UI pour les cards de films
 
   return (
     <div className="moviecomponent">
@@ -47,6 +58,7 @@ const CurrentMovies = () => {
             
           >
             <CardActionArea href={`https://www.themoviedb.org/movie/${movie.id}-${movie.title.toLowerCase().split(' ').join('-')}`} target="_blank">
+              
               <CardMedia
                 className="movieposter"
                 image={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}

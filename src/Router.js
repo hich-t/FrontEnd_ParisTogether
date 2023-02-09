@@ -34,18 +34,14 @@ const Router = () => {
           <Route
             path="/registertwo"
             element={
-              <Protected>
                 <Register2 />
-              </Protected>
             }
           />
           <Route path="/login" element={<Login />} />
           <Route
             path="/postlogin"
             element={
-              <Protected>
                 <PostLogin />
-              </Protected>
             }
           />
         </Routes>

@@ -5,7 +5,6 @@ import useLogged from "../logic/useLogged";
 import MapComponent from "../Component/reusableComponent/MapComponent";
 import Cards from "../Component/reusableComponent/Cards";
 
-
 const Profile = () => {
   const token = localStorage.getItem("auth-token");
   const navigate = useNavigate();
@@ -18,11 +17,12 @@ const Profile = () => {
   const [emailExist, setEmailExist] = useState(false);
 
   // même fonction que dans Register2, ajout/retrait des tags favoris
+  // utilisant les routes put et delete
 
   const addFavorite = async (tag) => {
     axios
       .put(
-        `https://back-end-paris-together-meleelyes.vercel.app/request/user`,
+        `http://localhost:3001/request/user`,
         { favoriteTag: tag },
         { headers: { authorization: token } }
       )
@@ -33,18 +33,15 @@ const Profile = () => {
   };
   const removeFavorite = async (tag) => {
     axios
-      .delete(
-        `https://back-end-paris-together-meleelyes.vercel.app/request/user`,
-        {
-          data: { favoriteTag: tag },
-          headers: { authorization: token },
-        }
-      )
+      .delete(`http://localhost:3001/request/user`, {
+        data: { favoriteTag: tag },
+        headers: { authorization: token },
+      })
       .then((res) => console.log(res.data))
       .catch((err) => console.log(err));
   };
 
-  // useEffect pour fetch les tags via API :
+  // useEffect pour fetch les tags via l'API :
 
   useEffect(() => {
     axios
@@ -58,9 +55,6 @@ const Profile = () => {
       .catch((error) => {
         console.log(error);
       });
-
-
-     
   }, []);
 
   // ici, la fonctionnalité pour upload une nouvelle image de profil
@@ -71,16 +65,12 @@ const Profile = () => {
     formData.append("profile_picture", image);
 
     axios
-      .put(
-        "https://back-end-paris-together-meleelyes.vercel.app/request/uploadimage",
-        formData,
-        {
-          headers: {
-            "content-type": "multipart/form-data",
-            authorization: token,
-          },
-        }
-      )
+      .put("http://localhost:3001/request/uploadimage", formData, {
+        headers: {
+          "content-type": "multipart/form-data",
+          authorization: token,
+        },
+      })
       .then((response) => {
         console.log(response.data);
       })
@@ -110,7 +100,6 @@ const Profile = () => {
 
       fetchFavEvents();
     }
-
   }, [user, loaded]);
 
   //fonctions pour le changement de mail/mdp via un put sur le endpoint /update
@@ -123,7 +112,7 @@ const Profile = () => {
     e.preventDefault();
     try {
       const res = await axios.put(
-        "https://back-end-paris-together-meleelyes.vercel.app/request/update",
+        "http://localhost:3001/request/update",
         { email },
         {
           headers: {
@@ -155,7 +144,7 @@ const Profile = () => {
     }
     try {
       const res = await axios.put(
-        "https://back-end-paris-together-meleelyes.vercel.app/request/update",
+        "http://localhost:3001/request/update",
         { password: password, confirm_password: confirmPassword },
         {
           headers: {
@@ -183,7 +172,7 @@ const Profile = () => {
             <h1 className="profiletitle">Ta photo de profil</h1>
             <img
               className="profileuserpic"
-              src={`https://back-end-paris-together-meleelyes.vercel.app${user.profile_picture}`}
+              src={`http://localhost:3001${user.profile_picture}`}
               alt=""
             />
             <input type="file" onChange={(e) => setImage(e.target.files[0])} />

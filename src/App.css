@@ -61,9 +61,6 @@
 abbr[title] {
   text-decoration: none;
 }
-/* .react-calendar__month-view__days__day--weekend {
-  color: #d10000;
- } */
 .react-calendar__tile:enabled:hover,
 .react-calendar__tile:enabled:focus {
   background: #f8f8fa;
@@ -1013,7 +1010,7 @@ input[type="file"] {
   font-family: "Adobe Bold";
   text-decoration: none;
   font-weight: 600;
-  margin: 10px 15px;
+  margin: 5px 5px;
   border: 2px solid #30ba9d;
   background-color: white;
   border-radius: 3px;
@@ -1027,7 +1024,7 @@ input[type="file"] {
   font-family: "Adobe Bold";
   text-decoration: none;
   font-weight: 600;
-  margin: 10px 15px;
+  margin: 5px 5px;
   border: 2px solid #30ba9d;
   background-color: #30ba9d;
   border-radius: 3px;

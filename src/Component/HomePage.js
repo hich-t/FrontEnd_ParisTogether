@@ -4,17 +4,14 @@ import Modal from "react-bootstrap/Modal";
 import axios from "axios";
 import "../Styles/homepage.css";
 import useLogged from "../logic/useLogged";
-import Video from "../Asset/vid.mp4";
 import Cards from "../Component/reusableComponent/Cards";
 import Button from "react-bootstrap/Button";
 import CurrentMovies from "../Component/reusableComponent/CurrentMovies";
 import Footer from "../Component/reusableComponent/Footer";
-import { UserContext } from "../Context/UserContext";
-import { useContext } from "react";
+
 const HomePage = () => {
 
-  const [userLogged, setUserLogged] = useContext(UserContext);
-  const token = localStorage.getItem("auth-token");
+
   const [event, setEvent] = useState([]);
   const [tags, setTags] = useState([]);
   const [searchByCategorie, setSearchByCategorie] = useState(false);
@@ -25,7 +22,7 @@ const HomePage = () => {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-console.log(userLogged)
+
   const loadMore = () => {
     let count = numberOfResult + 4;
     setNumberOfResult(count);
@@ -82,16 +79,11 @@ console.log(userLogged)
   }, []);
 
   const handleChange = async (e) => {
-    // setEvent(allData);
+
     e.target.value.length > 0
       ? setTagActive("Résultats de votre recherche")
       : fetchTags();
-    // setEvent((current) =>
-    //   current.filter((el) =>
-    //     el.fields.title.toLowerCase().includes(e.target.value.toLowerCase())
-    //   )
-    // );
-    //
+
 
     try {
       const callData = await axios.get(
@@ -108,21 +100,18 @@ console.log(userLogged)
     <div className="homePage">
       <div className="topPannel">
         <div>
-          {/*         <div className="videoCollections">
-            <video
-              autoPlay
-              muted
-              marginTop={"0"}
-              minWidth={"846px"}
-              height={"100%"}
-              width={"100%"}
-              src={`${Video}#t=0,15`}
-            />
-          </div> */}
+
         </div>
 
-        <Modal className="mod" show={show} onClick={handleClose}>
+        <Modal
+          className="mod"
+          show={show}
+          onHide={handleClose}
+          backdrop="static"
+          keyboard={false}
+        >
           <Modal.Header closeButton></Modal.Header>
+
           <Modal.Body>
             {" "}
             <MapComponent
@@ -131,6 +120,11 @@ console.log(userLogged)
               nameClass={"markercluster-map"}
             />
           </Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={handleClose}>
+              Close
+            </Button>
+          </Modal.Footer>
         </Modal>
 
         <div className="arroundMe">
@@ -164,8 +158,7 @@ console.log(userLogged)
           <div className="filtre">Filtrez par catégories </div>
           <div className="categorieRow">
             <button
-              style={{ backgroundColor: "#30ba9d" }}
-              className="custom-btn btn-13"
+              className="footerbacktotopbutton"
               onClick={() => fetchTags()}
             >
               Nouveautés
@@ -173,8 +166,8 @@ console.log(userLogged)
             {tags.map((e) =>
               e.facets.map((e, i) => (
                 <button
-                  style={{ backgroundColor: "#30ba9d" }}
-                  className="custom-btn btn-13"
+                 
+                  className="footerbacktotopbutton"
                   key={i}
                   onClick={() => fetchEventByTags(e.name)}
                 >
@@ -200,7 +193,7 @@ console.log(userLogged)
           {tagActive !== "Nouveautés" && (
             <div className="charger">
               {" "}
-              <button onClick={() => loadMore()} className="custom-btn btn-2">
+              <button onClick={() => loadMore()} className="footerbacktotopbutton">
                 Charger plus{" "}
               </button>
             </div>

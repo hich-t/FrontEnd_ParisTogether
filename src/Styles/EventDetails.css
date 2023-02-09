@@ -1,7 +1,6 @@
 @font-face {
   font-family: "Helvetica";
-  src: local("Helvetica.ttc"),
-    url("../fonts/Helvetica.ttc") format("truetype");
+  src: local("Helvetica.ttc"), url("../fonts/Helvetica.ttc") format("truetype");
 }
 
 @font-face {
@@ -21,9 +20,6 @@
   src: local("AdobeCleanIt.otf"),
     url("../fonts/AdobeCleanIt.otf") format("opentype");
 }
-
-
-
 
 .detailledInfoContainer {
   border-radius: 20px;
@@ -53,125 +49,115 @@
 
 .globalContainer {
   display: flex;
-justify-content:space-evenly;
-margin: 60px;
+  justify-content: space-evenly;
+  margin: 60px;
 }
 
-.mapCard{
-    width: 110%;
-    height:500px;
-    display:flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    border-radius: 15px;
-    background: #ffffff;
-    box-shadow: 20px 20px 41px #9e9e9e, -20px -20px 41px #ffffff;
-    margin: 10px;
-   
-    
+.mapCard {
+  width: 110%;
+  height: 500px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 15px;
+  background: #ffffff;
+  box-shadow: 20px 20px 41px #9e9e9e, -20px -20px 41px #ffffff;
+  margin: 10px;
 }
-
 
 .map {
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    opacity: 0.99;
-  }
-  .overlay {
-    z-index: 9;
-    margin: 30px;
-  }
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0.99;
+}
+.overlay {
+  z-index: 9;
+  margin: 30px;
+}
 
-  .imgContainer{
-    position: relative;
-  }
+.imgContainer {
+  position: relative;
+}
 
-  .leadText{
-    font-style: italic;
-    font-size: smaller;
-    padding: 10px;
-  }
+.leadText {
+  font-style: italic;
+  font-size: smaller;
+  padding: 10px;
+}
 
-  .fullDescription{
-    padding: 20px 50px 0px 50px;
-    text-align: justify;
-  }
+.fullDescription {
+  padding: 20px 50px 0px 50px;
+  text-align: justify;
+}
 
+.profilecontentframeDetails {
+  border-radius: 20px;
+  background: #ffffff;
+  box-shadow: 20px 20px 41px #9e9e9e, -20px -20px 41px #ffffff;
+  background-color: white;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
 
-  .profilecontentframeDetails{
-    border-radius: 20px;
-    background: #ffffff;
-    box-shadow: 20px 20px 41px #9e9e9e, -20px -20px 41px #ffffff;
-    background-color: white;
-    padding: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-  }
+.locationDetailsContainer {
+  width: 110%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 20px;
+  background: #ffffff;
+  box-shadow: 20px 20px 41px #9e9e9e, -20px -20px 41px #ffffff;
+  margin: 10px;
+  padding: 30px 10px 30px 10px;
+}
 
-  .locationDetailsContainer{
-    width: 110%;
-   /*  height:500px; */
-    display:flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    border-radius: 20px;
-    background: #ffffff;
-    box-shadow: 20px 20px 41px #9e9e9e, -20px -20px 41px #ffffff;
-    margin: 10px;
-    padding: 30px 10px 30px 10px;
+.infoDetailsContainer {
+  width: 110%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 20px;
+  background: #ffffff;
+  box-shadow: 20px 20px 41px #9e9e9e, -20px -20px 41px #ffffff;
+  margin: 10px;
+  padding: 10px;
+}
 
-  }
+.adressDetails {
+  padding-top: 15px;
+}
 
-  .infoDetailsContainer{
-    width: 110%;
-    /* height:500px; */
-    display:flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    border-radius: 20px;
-    background: #ffffff;
-    box-shadow: 20px 20px 41px #9e9e9e, -20px -20px 41px #ffffff;
-    margin: 10px;
-    padding: 10px;
+.profileCalendarDetails {
+  width: 352px;
+  margin-top: 20px;
+}
 
-  }
+.tittleDetailsCard {
+  padding: 30px;
+  font-family: "Adobe Bold";
+  font-size: x-large;
+}
 
-  .adressDetails{
-    padding-top: 15px;
-  }
-
-  .profileCalendarDetails{
-    width: 352px;
-    margin-top:20px;
-  }
-
-  .tittleDetailsCard{
-padding: 30px;
-    font-family: "Adobe Bold";
-    font-size: x-large;
-  }
-
-  .line {
-    width: 80%;
-    height: 0;
-    border: 1px solid #30ba9d;
-    opacity: 0.4;
-    display:inline-block;
-  }
-  .infoCardDetails{
-   
-      display: flex;
-      align-items: center;
-      justify-content: flex-start;
-      gap: 5px;
-      text-justify: auto;
-    
-  }
+.line {
+  width: 80%;
+  height: 0;
+  border: 1px solid #30ba9d;
+  opacity: 0.4;
+  display: inline-block;
+}
+.infoCardDetails {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 5px;
+  text-justify: auto;
+}

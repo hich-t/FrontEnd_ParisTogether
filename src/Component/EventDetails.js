@@ -71,8 +71,6 @@ const EventDetails = () => {
                       );
                     })}
                 </div>
-
-                {/* <div className="leadText">{e.fields.lead_text}</div> */}
                 <div
                   className="testconverthtml fullDescription"
                   dangerouslySetInnerHTML={{ __html: e.fields.description }}

@@ -25,6 +25,9 @@ const Navbar = () => {
     document.location.reload();
   };
 
+  // dans le return, utilisation de ternaries afin d'afficher le contenu adéquat
+  // selon le state Logged true ou false
+
   return (
     <>
       <div className="navbar">
@@ -49,7 +52,7 @@ const Navbar = () => {
           <div className="navbarbuttons">
             <img
               className="navbarprofilepic"
-              src={`https://back-end-paris-together-meleelyes.vercel.app${user.profile_picture}`}
+              src={`http://localhost:3001${user.profile_picture}`}
               alt="avatar de ton profil"
             />
             <button

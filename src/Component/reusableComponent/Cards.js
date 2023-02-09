@@ -1,15 +1,12 @@
-import React, { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "../../Styles/Cards.css";
 import axios from "axios";
 import { AddEvent, colorTagMatcher } from "../../logic/function";
-import Money from "../../Asset/money.png";
 import Heart from "../../Asset/heart.png";
 import Geo from "../../Asset/icons8-géorepérage-100.png";
 import Calendar from "../../Asset/calendar.png";
 import Handicap from "../../Asset/icons8-disability-64.png";
-import Blind from "../../Asset/icons8-malvoyant-60.png";
-import Deaf from "../../Asset/icons8-sourd-50 (1).png";
 import Empty from "../../Asset/emptyHeart.png";
 import useLogged from "../../logic/useLogged";
 
@@ -19,12 +16,13 @@ const Cards = (props) => {
   const token = localStorage.getItem("auth-token");
   const [isVisible, setIsVisible] = useState(false);
 
+  // Fonction d'ajout en favori de l'événement si l'utilisateur est logué par la méthode put
   const addFavorite = async (idEvent) => {
     if (user) {
       AddEvent(idEvent);
       await axios
         .put(
-          `https://back-end-paris-together-meleelyes.vercel.app/request/user`,
+          `http://localhost:3001/request/user`,
           { favoriteEvent: idEvent },
           { headers: { authorization: token } }
         )
@@ -44,13 +42,10 @@ const Cards = (props) => {
   const removeFavorite = async (idEvent) => {
     if (user) {
       axios
-        .delete(
-          `https://back-end-paris-together-meleelyes.vercel.app/request/user`,
-          {
-            data: { favoriteEvent: idEvent },
-            headers: { authorization: token },
-          }
-        )
+        .delete(`http://localhost:3001/request/user`, {
+          data: { favoriteEvent: idEvent },
+          headers: { authorization: token },
+        })
         .then((res) => console.log(res.data))
         .catch((err) => console.log(err));
     } else {
@@ -61,6 +56,7 @@ const Cards = (props) => {
     }
   };
 
+  // fonction permettant de separer les multi-tags collés par le charactere ";"
   const split = (text) => {
     let result = text.split(";");
     return result;

@@ -1,3 +1,5 @@
+// footer basique ajouté manuellement sur chaque page si nécéssaire
+
 const Footer = () => {
   const handleClick = () => {
     window.scrollTo({
