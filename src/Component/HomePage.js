@@ -110,7 +110,7 @@ const HomePage = () => {
           backdrop="static"
           keyboard={false}
         >
-          <Modal.Header closeButton></Modal.Header>
+          <Modal.Header closeButton className="homepagemapbutton"></Modal.Header>
 
           <Modal.Body>
             {" "}

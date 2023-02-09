@@ -115,7 +115,7 @@ const MapComponent = (props) => {
             onChange={(e) => setTown(e.target.value)}
           />
            <i style={{color: '#5CBDBB' }} className="fa-sharp fa-solid fa-location-crosshairs" onClick={() => geoLocationCoord()}></i>
-          <button className="registerbuttons" type="submit">
+          <button className="mapsearchbtn" type="submit">
             Search
           </button>
         </form>
